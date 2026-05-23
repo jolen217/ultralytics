@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 import torch
 
-from cust_yolo.preprocess import letterbox, to_tensor
+from deepbrain.cust_yolo.preprocess import letterbox, to_tensor
 
 
 class TestLetterbox:

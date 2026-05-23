@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import pytest
 
-from cust_yolo.hf_integration import run_detection
+from deepbrain.cust_yolo.hf_integration import run_detection
 
 
 class _FakeModel:

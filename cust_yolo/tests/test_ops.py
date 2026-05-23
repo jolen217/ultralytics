@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 import torch
 
-from cust_yolo.ops import box_iou, clip_boxes, scale_boxes, xywh2xyxy
+from deepbrain.cust_yolo.ops import box_iou, clip_boxes, scale_boxes, xywh2xyxy
 
 
 class TestXywh2Xyxy:

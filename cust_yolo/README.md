@@ -11,8 +11,9 @@ a drop-in helper for [HuggingFace Datasets](https://huggingface.co/docs/datasets
 ## Installation
 
 ```bash
-pip install -e ".[dev]"          # editable install + test/lint deps
-pip install -e ".[dev,onnx,hf]"  # also pull in onnxruntime and datasets
+uv venv
+uv pip install -e ".[dev]"          # editable install + test/lint deps
+uv pip install -e ".[dev,onnx,hf]"  # also pull in onnxruntime and datasets
 ```
 
 ---
@@ -23,7 +24,7 @@ pip install -e ".[dev,onnx,hf]"  # also pull in onnxruntime and datasets
 
 ```python
 import torch
-from cust_yolo import load_model, letterbox, to_tensor, non_max_suppression, scale_boxes
+from deepbrain.cust_yolo import load_model, letterbox, to_tensor, non_max_suppression, scale_boxes
 import cv2
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -48,7 +49,7 @@ if len(dets):
 ```python
 import numpy as np
 import torch
-from cust_yolo import load_onnx, letterbox, non_max_suppression, scale_boxes
+from deepbrain.cust_yolo import load_onnx, letterbox, non_max_suppression, scale_boxes
 
 sess   = load_onnx("model.onnx", device="cpu")
 inp    = sess.get_inputs()[0].name                         # usually "images"
@@ -66,8 +67,8 @@ dets   = non_max_suppression(raw)[0]
 
 ```python
 from datasets import load_dataset
-from cust_yolo import load_model
-from cust_yolo.hf_integration import run_detection
+from deepbrain.cust_yolo import load_model
+from deepbrain.cust_yolo.hf_integration import run_detection
 
 device = "cuda"
 model  = load_model("model.pt", device=device)
@@ -125,10 +126,11 @@ See [docs/api.md](docs/api.md) for full parameter documentation.
 ## Development
 
 ```bash
-pip install -e ".[dev]"
-pytest                  # run test suite
-ruff check src/ tests/  # lint
-ruff format src/ tests/ # format
+uv venv
+uv pip install -e ".[dev]"
+uv run pytest                  # run test suite
+uv run ruff check src/ tests/  # lint
+uv run ruff format src/ tests/ # format
 ```
 
 ---

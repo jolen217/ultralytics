@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.backends.legacy:build"
 
 [project]
-name = "cust-yolo"
+name = "deepbrain-cust-yolo"
 version = "0.1.0"
 description = "Pure-PyTorch YOLOv8 inference — no ultralytics runtime dependency."
 readme = "README.md"
@@ -26,6 +26,7 @@ dev  = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+namespaces = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

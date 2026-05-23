@@ -1,7 +1,7 @@
 import torch
 import pytest
 
-from cust_yolo.nms import TorchNMS, non_max_suppression
+from deepbrain.cust_yolo.nms import TorchNMS, non_max_suppression
 
 
 class TestTorchNMS:
