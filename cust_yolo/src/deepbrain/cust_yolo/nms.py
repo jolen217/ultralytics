@@ -198,7 +198,7 @@ def non_max_suppression(
     time_limit = 2.0 + max_time_img * bs
     multi_label &= nc > 1
 
-    prediction = prediction.transpose(-1, -2)       # (B, num_anchors, 4+nc+extra)
+    prediction = prediction.transpose(-1, -2)  # (B, num_anchors, 4+nc+extra)
     prediction[..., :4] = xywh2xyxy(prediction[..., :4])
 
     t = time.time()
@@ -256,6 +256,7 @@ def non_max_suppression(
 
         if "torchvision" in sys.modules:
             import torchvision
+
             i = torchvision.ops.nms(boxes, scores, iou_thres)
         else:
             i = TorchNMS.nms(boxes, scores, iou_thres)

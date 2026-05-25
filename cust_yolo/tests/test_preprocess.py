@@ -29,8 +29,8 @@ class TestLetterbox:
     def test_non_square_input_has_padding(self, bgr_image):
         # 480×640 → 640×640: height needs padding (480 < 640 after scale)
         _, _, (pad_x, pad_y) = letterbox(bgr_image, new_shape=(640, 640))
-        assert pad_x == 0   # width already fills target
-        assert pad_y > 0    # height is padded
+        assert pad_x == 0  # width already fills target
+        assert pad_y > 0  # height is padded
 
     def test_custom_new_shape(self, bgr_image):
         out, _, _ = letterbox(bgr_image, new_shape=(320, 320))

@@ -1,7 +1,5 @@
 from unittest.mock import MagicMock, patch
 
-import torch
-
 from deepbrain.cust_yolo.model import load_model, load_onnx, load_torchscript
 
 
@@ -10,7 +8,7 @@ class TestLoadModel:
         mock_model = MagicMock()
         ckpt = {"model": mock_model}
         with patch("deepbrain.cust_yolo.model.torch.load", return_value=ckpt):
-            result = load_model("fake.pt", device="cpu")
+            load_model("fake.pt", device="cpu")
         mock_model.float.assert_called_once()
         mock_model.float.return_value.eval.assert_called_once()
 
@@ -20,9 +18,7 @@ class TestLoadOnnx:
         mock_ort = MagicMock()
         with patch.dict("sys.modules", {"onnxruntime": mock_ort}):
             load_onnx("fake.onnx", device="cpu")
-        mock_ort.InferenceSession.assert_called_once_with(
-            "fake.onnx", providers=["CPUExecutionProvider"]
-        )
+        mock_ort.InferenceSession.assert_called_once_with("fake.onnx", providers=["CPUExecutionProvider"])
 
     def test_cuda_includes_cuda_provider(self):
         mock_ort = MagicMock()

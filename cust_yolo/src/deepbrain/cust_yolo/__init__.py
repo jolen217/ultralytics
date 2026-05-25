@@ -1,7 +1,7 @@
-from .preprocess import letterbox, to_tensor
-from .ops import box_iou, clip_boxes, scale_boxes, xywh2xyxy
-from .nms import TorchNMS, non_max_suppression
 from .model import load_model, load_onnx, load_torchscript
+from .nms import TorchNMS, non_max_suppression
+from .ops import box_iou, clip_boxes, scale_boxes, xywh2xyxy
+from .preprocess import letterbox, to_tensor
 
 __all__ = [
     "letterbox",

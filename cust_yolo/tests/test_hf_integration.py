@@ -1,6 +1,6 @@
 import numpy as np
-import torch
 import pytest
+import torch
 
 from deepbrain.cust_yolo.hf_integration import run_detection
 

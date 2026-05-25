@@ -39,5 +39,5 @@ def to_tensor(img: np.ndarray, device: str | torch.device = "cpu") -> torch.Tens
         Tensor of shape (1, 3, H, W), float32, values in [0, 1].
     """
     t = torch.from_numpy(img[..., ::-1].copy())  # BGR → RGB
-    t = t.permute(2, 0, 1).float() / 255.0       # HWC → CHW, normalise
+    t = t.permute(2, 0, 1).float() / 255.0  # HWC → CHW, normalise
     return t.unsqueeze(0).to(device)
