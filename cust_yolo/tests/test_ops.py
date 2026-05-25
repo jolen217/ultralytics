@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 import torch
 
+import deepbrain.cust_yolo.ops as _ops_mod
 from deepbrain.cust_yolo.ops import box_iou, clip_boxes, scale_boxes, xywh2xyxy
 
 
@@ -51,6 +52,15 @@ class TestClipBoxes:
         clip_boxes(boxes, (640, 640))
         assert torch.allclose(boxes, original)
 
+    def test_macos14_clamp_branch(self, monkeypatch):
+        monkeypatch.setattr(_ops_mod, "_macos14", True)
+        boxes = torch.tensor([[800.0, 900.0, 900.0, 1000.0]])
+        clip_boxes(boxes, (640, 640))
+        assert boxes[0, 0].item() <= 640
+        assert boxes[0, 1].item() <= 640
+        assert boxes[0, 2].item() <= 640
+        assert boxes[0, 3].item() <= 640
+
 
 class TestScaleBoxes:
     def test_identity(self):
@@ -68,8 +78,8 @@ class TestScaleBoxes:
         assert torch.allclose(out, torch.tensor([[0.0, 0.0, 640.0, 640.0]]))
 
     def test_removes_padding(self):
-        # 320×480 original letterboxed into 640×640: gain=640/480≈1.333, pad_x=80
-        orig_hw = (320, 480)
+        # 640×480 original letterboxed into 640×640: gain=1.0, pad_x=80
+        orig_hw = (640, 480)
         lb_hw = (640, 640)
         # A box in letterbox space that starts at the left-pad boundary
         boxes = torch.tensor([[80.0, 0.0, 640.0, 320.0]])

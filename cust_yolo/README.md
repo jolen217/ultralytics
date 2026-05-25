@@ -12,6 +12,9 @@ a drop-in helper for [HuggingFace Datasets](https://huggingface.co/docs/datasets
 
 ```bash
 uv venv
+```
+then one of:
+```bash
 uv pip install -e ".[dev]"          # editable install + test/lint deps
 uv pip install -e ".[dev,onnx,hf]"  # also pull in onnxruntime and datasets
 ```
@@ -129,6 +132,7 @@ See [docs/api.md](docs/api.md) for full parameter documentation.
 uv venv
 uv pip install -e ".[dev]"
 uv run pytest                  # run test suite
+uv run pytest --cov=deepbrain.cust_yolo --cov-report=term-missing  # with coverage
 uv run ruff check src/ tests/  # lint
 uv run ruff format src/ tests/ # format
 ```
